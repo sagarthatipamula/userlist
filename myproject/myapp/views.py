@@ -70,7 +70,7 @@ from django.shortcuts import render
 from django.shortcuts import render
 
 # views.py
-
+#api-http://127.0.0.1:8000/myapp/search/
 from django.shortcuts import render
 from django.http import JsonResponse
 
