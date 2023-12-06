@@ -1,0 +1,16 @@
+[
+  {
+    "name": "Samplefile1",
+"staffid_col": "staff_id",
+"user_active_col": ""
+  },
+  { "name": "Samplefile2",
+"staffid_col": "staff_id",
+"user_active_col": ""
+  },
+  {
+    "name": "Samplefile3",
+"staffid_col": "staff_id",
+"user_active_col": ""
+  }
+]

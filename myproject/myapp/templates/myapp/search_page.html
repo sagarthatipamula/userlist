@@ -1,0 +1,79 @@
+<!-- myapp/templates/myapp/search_page.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Page</title>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        input, button {
+            padding: 8px;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Search Page</h2>
+
+    <div>
+        <label for="search-input">Search:</label>
+        <input type="text" id="search-input" name="search_value">
+        <button onclick="search()">Search</button>
+    </div>
+
+    <table id="search-results-table">
+        <thead>
+            <tr>
+                <th>App Name</th>
+                <th>Status</th>
+                <th>Enabled</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <script>
+        function search() {
+            var searchValue = $('#search-input').val();
+
+            $.ajax({
+                url: '/myapp/api/search/' + searchValue + '/',
+                method: 'GET',
+                success: function(response) {
+                    $('#search-results-table tbody').empty();
+
+                    if (response.length > 0) {
+                        for (var i = 0; i < response.length; i++) {
+                            var result = response[i];
+                            var row = '<tr><td>' + result.app_name + '</td><td>' + result.status + '</td><td>' + result.enabled + '</td></tr>';
+                            $('#search-results-table tbody').append(row);
+                        }
+                    } else {
+                        $('#search-results-table tbody').append('<tr><td colspan="3">No search results</td></tr>');
+                    }
+                },
+                error: function(error) {
+                    console.error('API request failed:', error);
+                }
+            });
+        }
+    </script>
+
+</body>
+</html>
